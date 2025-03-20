@@ -56,7 +56,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 \#\#File Structure
-text
+```file structure
 eternal-echoes/
 ├── src/
 │   ├── index.html
@@ -70,6 +70,7 @@ eternal-echoes/
 ├── package.json
 ├── README.md
 └── LICENSE.md
+```
 Acknowledgments
 Tauri for providing the framework to build this cross-platform application
 
