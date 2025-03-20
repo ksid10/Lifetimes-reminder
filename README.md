@@ -1,9 +1,9 @@
 # Lifetimes-reminder
 
-\#Eternal Echoes
+##Eternal Echoes
 Eternal Echoes is a unique time management application that revolutionizes how we perceive and interact with time. Using visual time awareness and dynamic progress tracking, it transforms abstract temporal concepts into tangible, interactive experiences.
 
-\#\#Features
+##Features
 Dynamic Time Visualization: Aquarium-style progress bars with animated water, bubbles, and surface waves.
 
 Dual Tracking Systems: Monitor both "Lifetimes" (ongoing events) and "Reminders" (upcoming deadlines).
@@ -20,30 +20,34 @@ Customizable Display: Adjust card shape and size to optimize your view.
 
 Complete Data Backup: Export and import all data in a single JSON file.
 
-\#\#Installation
+##Installation
 Clone the repository:
 
-text
+```
 git clone https://github.com/ksid10/Lifetimes-reminder.git
 Navigate to the project directory:
-
-text
+```
+```
 cd eternal-echoes
+```
 Install dependencies:
-
-text
+```
 npm install
+```
 Run the development server:
 
-text
+```
 npm run tauri dev
+```
+
 Building for Desktop
 Eternal Echoes is built using Tauri and Rust, providing a small, fast, and secure desktop application.
 
 \#\#To build the app:
 
-text
+```
 npm run tauri build
+```
 This will create executables for your current platform in the src-tauri/target/release directory.
 
 \#\#Usage
