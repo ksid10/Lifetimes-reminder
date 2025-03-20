@@ -1,4 +1,4 @@
-# Lifetimes-reminder
+# Lifetimes-reminder app
 
 ## Eternal Echoes
 Eternal Echoes is a unique time management application that revolutionizes how we perceive and interact with time. Using visual time awareness and dynamic progress tracking, it transforms abstract temporal concepts into tangible, interactive experiences.
