@@ -3,6 +3,9 @@
 ## Eternal Echoes
 Eternal Echoes is a unique time management application that revolutionizes how we perceive and interact with time. Using visual time awareness and dynamic progress tracking, it transforms abstract temporal concepts into tangible, interactive experiences.
 
+### You can view the live demo of the project here:
+<a href="https://ksid10.github.io/Lifetimes-reminder/" target="_blank">Visit the Eternal Echos web</a>
+
 ## Features
 - **Dynamic Time Visualization**: Aquarium-style progress bars with animated water, bubbles, and surface waves.
 - **Dual Tracking Systems**: Monitor both "Lifetimes" (ongoing events) and "Reminders" (upcoming deadlines).
