@@ -71,8 +71,6 @@ eternal-echoes/
 ```
 Acknowledgments
 Tauri for providing the framework to build this cross-platform application
-
 The Rust community for their excellent language and tools
 
-```markdown
 
