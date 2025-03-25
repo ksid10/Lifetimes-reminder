@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" class="light-theme">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reminders</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen">
+    <!-- App Title -->
+    <h1 class="text-center text-3xl font-bold mt-4 mb-2 app-title">Reminders</h1>
+    
+    <!-- Know Me Link -->
+    <div class="text-center mb-4">
+        <a href="about.html" class="know-me-link">Know Me</a>
+    </div>
+    
+    <!-- Theme Toggles -->
+    <div class="fixed top-4 left-4 z-10 flex gap-2">
+        <button id="lightThemeBtn" class="theme-btn" title="Light Theme">☀️</button>
+        <button id="darkThemeBtn" class="theme-btn" title="Dark Theme">🌙</button>
+        <button id="blueThemeBtn" class="theme-btn" title="Blue Theme">🔵</button>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="fixed top-4 right-4 z-10 flex gap-4">
+        <button id="allButton" class="nav-btn active">
+            All
+        </button>
+        <button id="lifetimesButton" class="nav-btn">
+            Lifetimes
+        </button>
+        <button id="remaindersButton" class="nav-btn">
+            Reminders
+        </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="fixed bottom-4 right-4 z-10 flex gap-3">
+        <!-- Size Toggle Button -->
+        <button id="sizeToggleBtn" class="action-btn" title="Toggle Box Size">
+            <span id="sizeIcon">📏</span>
+        </button>
+        
+        <!-- Backup Button -->
+        <button id="backupButton" class="action-btn" title="Download Backup">
+            💾
+        </button>
+        
+        <!-- Restore Button -->
+        <button id="restoreButton" class="action-btn" title="Upload Backup">
+            📤
+        </button>
+        
+        <!-- Add Button -->
+        <button id="addButton" class="action-btn" title="Add New Event">
+            ➕
+        </button>
+    </div>
+
+    <!-- Hidden file input for backup restore -->
+    <input type="file" id="backupFileInput" accept=".json" class="hidden">
+
+    <!-- Main Content Grid -->
+    <div class="container mx-auto p-4 pt-20 mb-20">
+        <!-- Lifetimes Section -->
+        <div class="section-container">
+            <h2 class="section-title">Lifetimes</h2>
+            <div id="lifetimesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 mb-6">
+                <!-- Lifetimes will be added here -->
+            </div>
+        </div>
+        
+        <!-- Remainders Section -->
+        <div class="section-container">
+            <h2 class="section-title">
+                Reminders
+                <span class="drag-instruction">(Drag to prioritize)</span>
+            </h2>
+            <div id="eventsContainer" class="remainder-container gap-4">
+                <!-- Remainders will be added here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Size Adjustment Modal -->
+    <div id="sizeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-container bg-white rounded-lg p-6 w-96 max-w-md">
+            <h2 class="text-xl font-bold mb-4 title-text">Adjust Box Size</h2>
+            <div class="mb-4">
+                <label class="block mb-2">Box Shape</label>
+                <div class="flex gap-4 mb-4">
+                    <button id="rectangleBtn" class="shape-btn active">Rectangle</button>
+                    <button id="squareBtn" class="shape-btn">Square</button>
+                </div>
+                
+                <label class="block mb-2">Size</label>
+                <input type="range" id="sizeSlider" min="150" max="350" step="10" value="250" class="w-full">
+                <div class="flex justify-between text-sm mt-1">
+                    <span>Small</span>
+                    <span>Large</span>
+                </div>
+            </div>
+            <div class="flex justify-end">
+                <button id="closeBoxSizeBtn" class="px-4 py-2 submit-btn rounded">
+                    Apply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="eventModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-container bg-white rounded-lg p-6 w-96 max-w-md">
+            <h2 class="text-xl font-bold mb-4 title-text">Add New Timeline</h2>
+            <form id="eventForm">
+                <div class="mb-4">
+                    <label class="block mb-2">Event Type</label>
+                    <select id="eventType" class="w-full p-2 border rounded">
+                        <option value="lifetime">Lifetime</option>
+                        <option value="event">Remainder</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Event Name</label>
+                    <input type="text" id="eventName" placeholder="Event Name" 
+                           class="w-full p-2 border rounded mb-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Deadline or estimated time</label>
+                    <input type="datetime-local" id="eventDate" 
+                           class="w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Description</label>
+                    <textarea id="eventDescription" placeholder="Description" 
+                              class="w-full p-2 border rounded h-24"></textarea>
+                </div>
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="cancelAddBtn"
+                            class="px-4 py-2 cancel-btn rounded">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="px-4 py-2 submit-btn rounded">
+                        Add
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Event Modal -->
+    <div id="editEventModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-container bg-white rounded-lg p-6 w-96 max-w-md">
+            <h2 class="text-xl font-bold mb-4 title-text">Edit Timeline</h2>
+            <form id="editEventForm">
+                <input type="hidden" id="editEventId">
+                <div class="mb-4">
+                    <label class="block mb-2">Event Type</label>
+                    <select id="editEventType" class="w-full p-2 border rounded">
+                        <option value="lifetime">Lifetime</option>
+                        <option value="event">Remainder</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Event Name</label>
+                    <input type="text" id="editEventName" placeholder="Event Name" 
+                           class="w-full p-2 border rounded mb-2">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Deadline or estimated time</label>
+                    <input type="datetime-local" id="editEventDate" 
+                           class="w-full p-2 border rounded">
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2">Description</label>
+                    <textarea id="editEventDescription" placeholder="Description" 
+                              class="w-full p-2 border rounded h-24"></textarea>
+                </div>
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="cancelEditBtn"
+                            class="px-4 py-2 cancel-btn rounded">
+                        Cancel
+                    </button>
+                    <button type="submit" 
+                            class="px-4 py-2 submit-btn rounded">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-container bg-white rounded-lg p-6 w-96 max-w-md">
+            <h2 class="text-xl font-bold mb-4 title-text text-red-600">Delete Event</h2>
+            <p class="mb-6">Are you sure you want to delete this event? This action cannot be undone.</p>
+            <div class="flex justify-end gap-2">
+                <button id="cancelDeleteBtn" class="px-4 py-2 cancel-btn rounded">
+                    Cancel
+                </button>
+                <button id="confirmDeleteBtn" class="px-4 py-2 delete-btn rounded">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed bottom-20 right-4 px-4 py-2 rounded shadow-lg opacity-0 transition-opacity duration-300 z-50">
+        Notification message
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
