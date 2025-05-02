@@ -4,7 +4,7 @@
 Eternal Echoes is a unique time management application that revolutionizes how we perceive and interact with time. Using visual time awareness and dynamic progress tracking, it transforms abstract temporal concepts into tangible, interactive experiences.
 
 ### You can view the live demo of the project here:
-<a href="https://sidhvk.github.io/Lifetimes-reminder/" target="_blank">Visit the Eternal Echos web</a>
+<a href="https://sidkv313.github.io/Lifetimes-reminder/" target="_blank">Visit the Eternal Echos web</a>
 
 ## Features
 - **Dynamic Time Visualization**: Aquarium-style progress bars with animated water, bubbles, and surface waves.
@@ -20,7 +20,7 @@ Eternal Echoes is a unique time management application that revolutionizes how w
 Clone the repository:
 
 ```
-git clone https://github.com/ksid10/Lifetimes-reminder.git
+git clone https://github.com/sidkv313/Lifetimes-reminder.git
 ```
 
 Navigate to the project directory:
